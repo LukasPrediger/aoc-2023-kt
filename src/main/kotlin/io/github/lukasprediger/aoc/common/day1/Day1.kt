@@ -8,29 +8,27 @@ fun main() {
 }
 
 fun part1(): Int {
-    val elves = getElfCalories()
-
-    return elves.max()
+    return getElfCalories().max()
 }
 
 fun part2(): Int {
-    val elves = getElfCalories()
-    return elves.sorted().takeLast(3).sum()
+    return getElfCalories().sorted().takeLast(3).sum()
 }
 
-private fun getElfCalories(): MutableList<Int> {
-    val elves = mutableListOf<Int>()
+private fun getElfCalories(): List<Int> {
+    val input = readInput(1).iterator()
 
-    val input = readInput(1)
+    return generateSequence {
+        while (input.hasNext()) {
+            var current = 0
+            var next = input.next()
 
-    var current = 0
-    input.forEach {
-        if (it.isBlank()) {
-            elves.add(current)
-            current = 0
-        } else {
-            current += it.toInt()
+            while (next.isNotBlank()) {
+                current += next.toInt()
+                next = if (input.hasNext()) input.next() else ""
+            }
+            return@generateSequence current
         }
-    }
-    return elves
+        return@generateSequence null
+    }.toList()
 }
