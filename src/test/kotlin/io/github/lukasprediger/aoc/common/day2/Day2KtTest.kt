@@ -7,16 +7,16 @@ class Day2KtTest {
 
     @Test
     fun testDraw() {
-        part1(listOf("A X")) shouldBe 4
+        part1("A X") shouldBe 4
     }
 
     @Test
     fun testWin() {
-        part1(listOf("A Y")) shouldBe 8
+        part1("A Y") shouldBe 8
     }
     @Test
     fun testLoss() {
-        part1(listOf("B X")) shouldBe 1
+        part1("B X") shouldBe 1
     }
 
     @Test
@@ -25,7 +25,7 @@ class Day2KtTest {
             "A Y",
             "B X",
             "C Z"
-        )) shouldBe 15
+        ).joinToString("\n")) shouldBe 15
     }
 }
 

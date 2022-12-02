@@ -1,62 +1,77 @@
 package io.github.lukasprediger.aoc.common.day2
 
-import io.github.lukasprediger.aoc.common.readInput
+import com.github.h0tk3y.betterParse.parser.parse
+import io.github.lukasprediger.aoc.common.readInputRaw
+import java.lang.IllegalArgumentException
 
 fun main() {
-    val input = readInput(2)
+    val input = readInputRaw(2)
 
     println(part1(input))
+    println(part2(input))
 }
 
-fun part1(input: List<String>): Int {
-    return input.map { s ->
-        val (opponent, proponent) = s.split(' ').map { Play.fromChar(it.first()) }
-        return@map proponent.against(opponent).points + proponent.points
-    }.sum()
+fun part1(input: String): Int = RockPaperScissorsParser
+        .parse(RockPaperScissorsParser.tokenizer.tokenize(input))
+        .map(::pointsForRound)
+        .sum()
+
+fun part2(input: String): Int = RockPaperScissorsParser.roundsWithOutcome
+        .parse(RockPaperScissorsParser.tokenizer.tokenize(input))
+        .map {
+            it.first to playForOutcome(it.first, it.second)
+        }.map(::pointsForRound).sum()
+
+fun playForOutcome(opponent: Play, outcome: Outcome): Play = when (outcome) {
+    Outcome.DRAW -> opponent
+    Outcome.WIN -> matchups.entries.find { it.value == opponent }!!.key
+    Outcome.LOSS -> matchups[opponent]!!
 }
 
-val matchups = listOf(
-    Play.PAPER to Play.ROCK,
-    Play.ROCK to Play.SCISSORS,
-    Play.SCISSORS to Play.PAPER
+fun outcomeForMatchup(matchup: Pair<Play, Play>): Outcome = matchup.let { (proponent, oponent) ->
+    when {
+        proponent == oponent -> Outcome.DRAW
+        matchups[proponent] == oponent -> Outcome.WIN
+        else -> Outcome.LOSS
+    }
+}
+
+fun pointsForRound(round: Pair<Play, Play>): Int = outcomeForMatchup(round).points + round.second.points
+
+val matchups = mapOf(
+        Play.PAPER to Play.ROCK,
+        Play.ROCK to Play.SCISSORS,
+        Play.SCISSORS to Play.PAPER
 )
 
-enum class Play(val points: Int, vararg chars: Char) {
-    ROCK(1, 'A', 'X'),
-    PAPER(2, 'B', 'Y'),
-    SCISSORS(3, 'C', 'Z');
-
-    val chars = chars.toList()
-
-    fun against(other: Play) = when (this) {
-        ROCK -> when (other) {
-            ROCK -> Outcome.DRAW
-            PAPER -> Outcome.LOSS
-            SCISSORS -> Outcome.WIN
-        }
-
-        PAPER -> when (other) {
-            ROCK -> Outcome.WIN
-            PAPER -> Outcome.DRAW
-            SCISSORS -> Outcome.LOSS
-        }
-
-        SCISSORS -> when (other) {
-            ROCK -> Outcome.LOSS
-            PAPER -> Outcome.WIN
-            SCISSORS -> Outcome.DRAW
-        }
-    }
+enum class Play(val points: Int) {
+    ROCK(1),
+    PAPER(2),
+    SCISSORS(3);
 
     companion object {
-        fun fromChar(char: Char) = values().find { it.chars.contains(char) }!!
+        fun fromChar(char: Char) = when(char) {
+            'A', 'X' -> ROCK
+            'B', 'Y' -> PAPER
+            'C', 'Z' -> SCISSORS
+            else -> throw IllegalArgumentException("Unknown char $char")
+        }
     }
 }
 
 enum class Outcome(val points: Int) {
     WIN(6),
     DRAW(3),
-    LOSS(0)
+    LOSS(0);
+
+    companion object {
+        fun fromChar(char: Char) = when (char) {
+            'X' -> LOSS
+            'Y' -> DRAW
+            'Z' -> WIN
+            else -> throw IllegalArgumentException("Unknown char $char")
+        }
+    }
 }
 
 //Rock A X

@@ -21,13 +21,15 @@ fun getInputFromRemote(day: Int) {
     println("Wrote input for day $day to $absolutePath")
 }
 
-fun readInput(day: Int): List<String> {
+fun readInputRaw(day: Int): String {
     val inputFile = getInputFile(day)
     if (!inputFile.exists()) {
         println("Input file ${inputFile.name} does not exist. Downloading")
         getInputFromRemote(day)
     }
-    return inputFile.readLines()
+    return inputFile.readText()
 }
+
+fun readInput(day: Int): List<String> = readInputRaw(day).lines()
 
 fun readCsv(day: Int): List<List<String>> = readInput(day).map { it.split(",") }
