@@ -10,7 +10,7 @@ fun getInputFromRemote(day: Int) {
     val absolutePath = getInputFile(day).absolutePath
 
     val process = ProcessBuilder()
-        .command("${homeFolder}/.cargo/bin/aoc download -y 2022 -d $day -i $absolutePath".split(' '))
+        .command("aoc download -y 2022 -d $day -I -i $absolutePath".split(' '))
         .inheritIO()
         .start()
 
