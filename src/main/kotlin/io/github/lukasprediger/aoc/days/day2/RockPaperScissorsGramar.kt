@@ -6,11 +6,11 @@ import io.github.lukasprediger.aoc.common.BaseGrammar
 
 object RockPaperScissorsParser : BaseGrammar<List<Pair<Play, Play>>>() {
     private val round by CHAR and skip(WHITESPACE) and CHAR map {
-        (opponent, proponent) -> Play.fromChar(opponent.text.first()) to Play.fromChar(proponent.text.first())
+        (opponent, proponent) -> Play.fromChar(opponent) to Play.fromChar(proponent)
     }
 
     private val roundWithOutcome by CHAR and CHAR map {
-        (opponent, outcome) -> Play.fromChar(opponent.text.first()) to Outcome.fromChar(outcome.text.first())
+        (opponent, outcome) -> Play.fromChar(opponent) to Outcome.fromChar(outcome)
     }
 
     private val rounds by separatedTerms(round, WHITESPACE)
