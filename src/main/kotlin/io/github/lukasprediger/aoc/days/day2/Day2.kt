@@ -1,4 +1,4 @@
-package io.github.lukasprediger.aoc.common.day2
+package io.github.lukasprediger.aoc.days.day2
 
 import com.github.h0tk3y.betterParse.parser.parse
 import io.github.lukasprediger.aoc.common.readInputRaw

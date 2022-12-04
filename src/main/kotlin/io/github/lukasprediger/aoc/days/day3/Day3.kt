@@ -1,4 +1,4 @@
-package io.github.lukasprediger.aoc.common.day3
+package io.github.lukasprediger.aoc.days.day3
 
 import io.github.lukasprediger.aoc.common.readInput
 
@@ -29,7 +29,7 @@ fun calculatePriority(input: String): Int {
             .map { it.key }
             .also { if(it.size > 1) throw IllegalArgumentException("Too many items found") }
             .map { it.priority }
-            .first()
+            .firstOrNull() ?: 0
 
 }
 

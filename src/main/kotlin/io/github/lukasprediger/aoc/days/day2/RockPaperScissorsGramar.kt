@@ -1,18 +1,10 @@
-package io.github.lukasprediger.aoc.common.day2
+package io.github.lukasprediger.aoc.days.day2
 
-import com.github.h0tk3y.betterParse.combinators.and
-import com.github.h0tk3y.betterParse.combinators.map
-import com.github.h0tk3y.betterParse.combinators.separatedTerms
-import com.github.h0tk3y.betterParse.combinators.skip
-import com.github.h0tk3y.betterParse.grammar.Grammar
-import com.github.h0tk3y.betterParse.lexer.regexToken
+import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.parser.Parser
+import io.github.lukasprediger.aoc.common.BaseGrammar
 
-object RockPaperScissorsParser : Grammar<List<Pair<Play, Play>>>() {
-
-    private val CHAR by regexToken("\\w")
-    private val WHITESPACE by regexToken("\\s+", ignore = true)
-
+object RockPaperScissorsParser : BaseGrammar<List<Pair<Play, Play>>>() {
     private val round by CHAR and skip(WHITESPACE) and CHAR map {
         (opponent, proponent) -> Play.fromChar(opponent.text.first()) to Play.fromChar(proponent.text.first())
     }

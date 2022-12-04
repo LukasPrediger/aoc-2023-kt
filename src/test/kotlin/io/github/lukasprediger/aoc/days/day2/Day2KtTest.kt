@@ -1,6 +1,6 @@
-package io.github.lukasprediger.aoc.common.day2
+package io.github.lukasprediger.aoc.days.day2
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class Day2KtTest {

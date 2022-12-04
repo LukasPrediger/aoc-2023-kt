@@ -1,4 +1,4 @@
-package io.github.lukasprediger.aoc.common.day1
+package io.github.lukasprediger.aoc.days.day1
 
 import io.github.lukasprediger.aoc.common.readInput
 
