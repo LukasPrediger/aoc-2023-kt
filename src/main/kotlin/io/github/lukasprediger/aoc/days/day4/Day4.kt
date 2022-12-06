@@ -3,9 +3,14 @@ package io.github.lukasprediger.aoc.days.day4
 import com.github.h0tk3y.betterParse.combinators.and
 import com.github.h0tk3y.betterParse.combinators.map
 import com.github.h0tk3y.betterParse.combinators.skip
+import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.parser.Parser
-import io.github.lukasprediger.aoc.common.BaseGrammar
+import io.github.lukasprediger.aoc.common.Tokens.COMMA
+import io.github.lukasprediger.aoc.common.Tokens.INTEGER
+import io.github.lukasprediger.aoc.common.Tokens.MINUS
+import io.github.lukasprediger.aoc.common.Tokens.baseTokens
 import io.github.lukasprediger.aoc.common.readInput
+import io.github.lukasprediger.aoc.days.day5.parseString
 
 fun main() {
     val input = readInput(4).filter(String::isNotBlank)
@@ -28,10 +33,12 @@ fun part2(input: List<String>): Int = input
 fun IntRange.contains(other: IntRange) = other.all { this.contains(it) }
 fun IntRange.overlaps(other: IntRange) = other.any { this.contains(it) }
 
-object RangeGrammar : BaseGrammar<Pair<IntRange, IntRange>>() {
+object RangeGrammar : Grammar<Pair<IntRange, IntRange>>() {
     val range by INTEGER and skip(MINUS) and INTEGER map { (first, second) -> first..second }
 
     private val rangePairs by range and skip(COMMA) and range map { (first, second) -> first to second }
+
+    override val tokens = (super.tokens + baseTokens).distinct()
 
     override val rootParser: Parser<Pair<IntRange, IntRange>> = rangePairs
 }

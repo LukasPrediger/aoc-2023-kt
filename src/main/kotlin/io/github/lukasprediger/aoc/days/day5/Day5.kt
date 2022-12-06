@@ -6,6 +6,7 @@ import com.github.h0tk3y.betterParse.lexer.literalToken
 import com.github.h0tk3y.betterParse.lexer.regexToken
 import com.github.h0tk3y.betterParse.parser.Parser
 import com.github.h0tk3y.betterParse.parser.parse
+import io.github.lukasprediger.aoc.common.Tokens
 import io.github.lukasprediger.aoc.common.readInputRaw
 import javax.sql.RowSetEvent
 
@@ -55,19 +56,14 @@ object OperationGrammar : Grammar<List<Operation>>() {
     val fromToken by literalToken("from")
     val toToken by literalToken("to")
 
-    val WHITESPACE by regexToken("\\s+", ignore = true)
-
-    val DIGITS by regexToken("\\d*")
-    val INTEGER by DIGITS use { text.toInt() }
-
-
     var operation: Parser<Operation> =
-        skip(moveToken) and INTEGER and skip(fromToken) and INTEGER and skip(toToken) and INTEGER map { (amount, from, to) ->
+        skip(moveToken) and Tokens.INTEGER and skip(fromToken) and Tokens.INTEGER and skip(toToken) and Tokens.INTEGER map { (amount, from, to) ->
             Operation(amount, from - 1, to - 1)
         }
 
-    val operations by separatedTerms(operation, WHITESPACE)
+    val operations by separatedTerms(operation, Tokens.WHITESPACE)
 
+    override val tokens = (super.tokens + Tokens.baseTokens).distinct()
     override val rootParser = operations
 
 }
