@@ -21,7 +21,6 @@ fun main() {
     val input = readInputRaw(6)
     println(part1(input))
     println(part2(input))
-    println(findStartMarker("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 14))
 }
 
 fun part1(input: String): Int = findStartMarker(input, 4)

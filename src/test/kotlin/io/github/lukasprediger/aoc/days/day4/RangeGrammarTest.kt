@@ -2,6 +2,7 @@ package io.github.lukasprediger.aoc.days.day4
 
 import com.github.h0tk3y.betterParse.parser.parseToEnd
 import io.github.lukasprediger.aoc.days.day2.shouldBe
+import io.github.lukasprediger.aoc.days.day5.parseString
 import org.junit.jupiter.api.Test
 
 class RangeGrammarTest{
