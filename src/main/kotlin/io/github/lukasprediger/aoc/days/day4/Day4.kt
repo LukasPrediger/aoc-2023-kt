@@ -10,7 +10,7 @@ import io.github.lukasprediger.aoc.common.Tokens.INTEGER
 import io.github.lukasprediger.aoc.common.Tokens.MINUS
 import io.github.lukasprediger.aoc.common.Tokens.baseTokens
 import io.github.lukasprediger.aoc.common.readInput
-import io.github.lukasprediger.aoc.days.day5.parseString
+import io.github.lukasprediger.aoc.common.parseString
 
 fun main() {
     val input = readInput(4).filter(String::isNotBlank)

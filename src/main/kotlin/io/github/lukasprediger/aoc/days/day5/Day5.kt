@@ -3,12 +3,10 @@ package io.github.lukasprediger.aoc.days.day5
 import com.github.h0tk3y.betterParse.combinators.*
 import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.lexer.literalToken
-import com.github.h0tk3y.betterParse.lexer.regexToken
 import com.github.h0tk3y.betterParse.parser.Parser
-import com.github.h0tk3y.betterParse.parser.parse
 import io.github.lukasprediger.aoc.common.Tokens
+import io.github.lukasprediger.aoc.common.parseString
 import io.github.lukasprediger.aoc.common.readInputRaw
-import javax.sql.RowSetEvent
 
 fun main() {
     val input = readInputRaw(5)
@@ -68,4 +66,3 @@ object OperationGrammar : Grammar<List<Operation>>() {
 
 }
 
-fun <T> Grammar<T>.parseString(input: String) = parse(tokenizer.tokenize(input))

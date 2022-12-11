@@ -1,8 +1,10 @@
 package io.github.lukasprediger.aoc.common
 
 import com.github.h0tk3y.betterParse.combinators.use
+import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.lexer.literalToken
 import com.github.h0tk3y.betterParse.lexer.regexToken
+import com.github.h0tk3y.betterParse.parser.parse
 
 object Tokens {
     val BLANK_LINE = regexToken("(?:\\h*\\n){2,}")
@@ -28,3 +30,5 @@ object Tokens {
     val baseTokens = listOf(charToken, stringToken, DIGITS, MINUS, COMMA, OPENING_BRACKET, CLOSING_BRACKET, SPACE, WHITESPACE)
 
 }
+
+fun <T> Grammar<T>.parseString(input: String) = parse(tokenizer.tokenize(input))

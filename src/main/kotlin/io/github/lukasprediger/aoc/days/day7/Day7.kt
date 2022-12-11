@@ -6,7 +6,7 @@ import com.github.h0tk3y.betterParse.lexer.literalToken
 import com.github.h0tk3y.betterParse.lexer.regexToken
 import com.github.h0tk3y.betterParse.parser.Parser
 import io.github.lukasprediger.aoc.common.readInputRaw
-import io.github.lukasprediger.aoc.days.day5.parseString
+import io.github.lukasprediger.aoc.common.parseString
 import java.io.FileNotFoundException
 import java.util.*
 

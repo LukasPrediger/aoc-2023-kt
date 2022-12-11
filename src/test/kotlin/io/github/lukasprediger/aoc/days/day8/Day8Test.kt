@@ -1,6 +1,6 @@
 package io.github.lukasprediger.aoc.days.day8
 
-import io.github.lukasprediger.aoc.days.day2.shouldBe
+import io.github.lukasprediger.aoc.common.shouldBe
 import org.junit.jupiter.api.Test
 
 class Day8Test {

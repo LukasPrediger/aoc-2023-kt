@@ -1,6 +1,6 @@
 package io.github.lukasprediger.aoc.days.day2
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import io.github.lukasprediger.aoc.common.shouldBe
 import org.junit.jupiter.api.Test
 
 class Day2KtTest {
@@ -29,6 +29,3 @@ class Day2KtTest {
     }
 }
 
-infix fun Any?.shouldBe(expected: Any?) {
-    assertEquals(expected, this)
-}

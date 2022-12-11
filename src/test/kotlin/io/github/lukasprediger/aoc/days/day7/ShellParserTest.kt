@@ -2,8 +2,8 @@ package io.github.lukasprediger.aoc.days.day7
 
 import com.github.h0tk3y.betterParse.lexer.TokenMatchesSequence
 import com.github.h0tk3y.betterParse.parser.parse
-import io.github.lukasprediger.aoc.days.day2.shouldBe
-import io.github.lukasprediger.aoc.days.day5.parseString
+import io.github.lukasprediger.aoc.common.shouldBe
+import io.github.lukasprediger.aoc.common.parseString
 import io.github.lukasprediger.aoc.days.day7.FsEntry.Directory
 import io.github.lukasprediger.aoc.days.day7.FsEntry.File
 import org.junit.jupiter.api.Test
