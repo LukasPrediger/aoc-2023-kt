@@ -3,14 +3,14 @@ package io.github.lukasprediger.aoc.common
 import java.io.File
 
 private val homeFolder: String = System.getProperty("user.home")
-private val aocFolder = File("$homeFolder/aoc2022").apply { mkdir() }
+private val aocFolder = File("$homeFolder/aoc2023").apply { mkdir() }
 
 private fun getInputFile(day: Int) = File(aocFolder, "day$day.txt")
 fun getInputFromRemote(day: Int) {
     val absolutePath = getInputFile(day).absolutePath
 
     val process = ProcessBuilder()
-        .command("aoc download -y 2022 -d $day -I -i $absolutePath".split(' '))
+        .command("aoc download -y 2023 -d $day -I -i $absolutePath".split(' '))
         .inheritIO()
         .start()
 

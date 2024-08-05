@@ -3,32 +3,35 @@ package io.github.lukasprediger.aoc.days.day1
 import io.github.lukasprediger.aoc.common.readInput
 
 fun main() {
-    println(part1())
-    println(part2())
+    val input = readInput(1)
+    part1(input)
+    part2(input)
 }
 
-fun part1(): Int {
-    return getElfCalories().max()
-}
-
-fun part2(): Int {
-    return getElfCalories().sorted().takeLast(3).sum()
-}
-
-private fun getElfCalories(): List<Int> {
-    val input = readInput(1).iterator()
-
-    return generateSequence {
-        while (input.hasNext()) {
-            var current = 0
-            var next = input.next()
-
-            while (next.isNotBlank()) {
-                current += next.toInt()
-                next = if (input.hasNext()) input.next() else ""
+fun part1(input: List<String>) {
+    println(
+        input.filter(String::isNotBlank).sumOf { line ->
+            return@sumOf line.filter(Char::isDigit).let {
+                (it.take(1) + it.takeLast(1)).toInt()
+            }.also {
+//                println("$line -> $it")
             }
-            return@generateSequence current
         }
-        return@generateSequence null
-    }.toList()
+    )
+}
+
+fun part2(input: List<String>) {
+    input.map { it.lowercase() }.map {
+        it
+            .replace("zero", "0")
+            .replace("one", "1")
+            .replace("two", "2")
+            .replace("three", "3")
+            .replace("four", "4")
+            .replace("five", "5")
+            .replace("six", "6")
+            .replace("seven", "7")
+            .replace("eight", "8")
+            .replace("nine", "9")
+    }.also(::part1)
 }
